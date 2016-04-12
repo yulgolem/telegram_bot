@@ -25,5 +25,9 @@ module TelegramBot
     config.web_console.whiny_requests = false
     config.autoload_paths += %W(#{config.root}/app/jobs)
     config.eager_load_paths += %W(#{config.root}/app/jobs) # this is for Sidekiq
+
+    config.after_initialize do
+        ListenerJob.perform_async()
+    end
   end
 end
